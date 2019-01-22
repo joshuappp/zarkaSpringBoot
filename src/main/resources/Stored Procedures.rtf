@@ -1,0 +1,49 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red23\green198\blue163;}
+{\*\expandedcolortbl;;\csgenericrgb\c9020\c77647\c63922;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww15760\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf2 \
+STORED PROCEDURES:\
+\
+getLatestData\
+@Query:\
+\
+SELECT DISTINCT b_name,c_name,c_short,bank_buy,bank_sell,SUBSTRING(in_date,1,16) FROM bank,currency,currency_values WHERE bank.id=currency_values.b_id AND currency.id=currency_values.c_id ORDER BY cv_id DESC LIMIT 30\
+\
+getHistory\
+@Query:\
+\
+SELECT DISTINCT b_name,c_name,c_short,bank_buy,bank_sell,SUBSTRING(in_date,1,16) FROM bank,currency,currency_values WHERE bank.id=currency_values.b_id AND currency.id=currency_values.c_id ORDER BY in_date,b_name\
+\
+getUserData\
+@Query\
+\
+SELECT u.id, u.email, s.notify, s.via, s.bank, s.currency, s.sell_or_buy, s.sell_amount_notify, s.buy_amount_notify, s.theme, s.theme_color  \
+FROM user u, settings s\
+WHERE u.id = s.id\
+AND u.id = userid\
+\
+\
+getUser()\
+@Query\
+\
+SELECT id, email\
+FROM user WHERE email = useremail\
+\
+getUserData()\
+@Query\
+\
+SELECT u.id,u.email, s.notify, s.via, s.bank, s.currency, s.sell_or_buy, s.sell_amount_notify, s.buy_amount_notify, s.theme, s.theme_color  \
+FROM user u, settings s\
+WHERE u.id = s.id\
+AND u.id = userid\
+\
+\
+\
+\
+\
+ }
